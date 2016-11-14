@@ -1,0 +1,25 @@
+<?php
+namespace Salesfly\Salesfly\Repositories;
+use Salesfly\Salesfly\Entities\Payment;
+
+class PaymentRepo extends BaseRepo{
+    public function getModel()
+    {
+        return new Payment;
+    }
+
+   public function paymentById($id){
+       $payment=Payment::Where('payments.orderPurchase_id','=',$id)->first();
+       return $payment;
+   }
+   public function payIDLocal($id){
+       $payment=Payment::where('payments.purchase_id','=',$id)->first();
+       return $payment;
+   }
+    public function Totales($fecha1,$fecha2){
+       $payment=Payment::select(\DB::raw("SUM(Acuenta) as totalPaga,SUM(saldo) as totSaldo"))
+        ->whereBetween("created_at",[$fecha1,$fecha2]) ->get();
+       return $payment;
+   }
+   
+} 
