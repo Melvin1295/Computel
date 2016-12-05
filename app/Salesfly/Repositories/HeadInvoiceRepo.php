@@ -8,8 +8,8 @@ class HeadInvoiceRepo extends BaseRepo{
         return new HeadInvoice;
     }
 
-    public function consult($id){
-    	$headInvoice=HeadInvoice::join("sales","sales.id","=","headInvoices.venta_id")
+     public function consult($id){
+        $headInvoice=HeadInvoice::join("sales","sales.id","=","headInvoices.venta_id")
                                  ->leftjoin("customers","customers.id","=","headInvoices.cliente_id")
                                  ->leftjoin("employees","employees.id","=","sales.employee_id")
                                  ->join("detCash","detCash.id","=","sales.detCash_id")
@@ -17,12 +17,14 @@ class HeadInvoiceRepo extends BaseRepo{
                                  ->join("cashHeaders","cashHeaders.id","=","cashes.cashHeader_id")
                                  ->join("stores","stores.id","=","cashHeaders.store_id")
                               ->select(\DB::raw("headInvoices.*,IF(employees.id>0,CONCAT(employees.nombres,' ',employees.apellidos),'.....') as nomEmpleado,
-                              	customers.ruc,stores.razonSocial,stores.direccion as direccionEmpresa, detCash.montoMovimientoTarjeta as tarjeta,
-                              	detCash.montoMovimientoEfectivo as efectivo,sales.descuento,stores.provincia,stores.departamento,cashes.id as cajaid,
-                              	stores.email"))
-    	                      ->where("headInvoices.id","=",$id)
-    	                      ->first();
-    	return $headInvoice;
+                                customers.ruc,stores.razonSocial,stores.direccion as direccionEmpresa, detCash.montoMovimientoTarjeta as tarjeta,
+                                detCash.montoMovimientoEfectivo as efectivo,sales.descuento,stores.provincia,stores.departamento,cashes.id as cajaid,
+                                stores.email,SUBSTRING(sales.created_at,9,2) as dia,
+                                SUBSTRING(sales.created_at,6,2) as mes,
+                                SUBSTRING(sales.created_at,1,4) as anio"))
+                              ->where("headInvoices.id","=",$id)
+                              ->first();
+        return $headInvoice;
     }
     public function DatosDocumento($id){
          $headInvoice=HeadInvoice::join("sales","sales.id","=","headInvoices.venta_id")

@@ -32,15 +32,10 @@
 
 
            
-              <div ng-show="CodigoFactura!=undefined" style="background:black; top=50%; color:#fff; position:relative;">
-              <br>
-              <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-              <h1>Generando Documento de Venta espere Por Favor <img src="/../images/cargando.gif"></h1>
-             </div>
 
 
 
-            <div ng-hide="CodigoFactura!=undefined" class="nav-tabs-custom" id="myTabs">
+            <div  class="nav-tabs-custom" id="myTabs">
                 <ul class="nav nav-tabs">
                   <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Venta</a></li>
                   <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false" ng-click="actualizarCaja()">Caja Venta</a></li>

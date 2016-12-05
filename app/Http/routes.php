@@ -33,6 +33,7 @@ Route::get('status', function(){
         ->header('Content-Type', 'text/html; charset=UTF-8');
 });
 
+Route::get('/factura/{id}', 'SalesController@factura1');
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');

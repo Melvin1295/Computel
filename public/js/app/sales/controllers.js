@@ -476,8 +476,15 @@
                                                       $window.open(data);
                                             });
                 }
-
-                $scope.datosFactura=function(codigoFactu){
+                 $scope.datosFactura=function(codigoFactu){
+                    //$window.open('http://localhost/factura/'+codigoFactu);
+                        window.open('http://localhost/factura/'+codigoFactu, "nuevo", "directories=no, location=no, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, width=1000, height=700");
+                        if($scope.banService==true){
+                           $window.location.href='/services';
+                       }
+                }
+         
+                $scope.datosFactura1=function(codigoFactu){
                    // alert("codigoFactu : "+codigoFactu);Document_venta_Factura
                     crudServiceOrders.factura('detfactura',codigoFactu).then(function(data){    
                                             $scope.detVoices=data;

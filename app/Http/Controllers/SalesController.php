@@ -122,7 +122,18 @@ class SalesController extends Controller
     {
         return View('sales.form_createS');
     }
-
+     public function factura1($id){
+        $headIvoiceRepo = new HeadInvoiceRepo;
+        $factura = $headIvoiceRepo->consult($id);
+        $detailIvoiceRepo = new DetailInvoiceRepo;
+        $detFactura = $detailIvoiceRepo->detFactura($id);
+        if($factura->tipoDoc=='F'){
+            return View('sales.factura',compact('factura'),compact('detFactura'));
+        }else{
+            return View('sales.boleta',compact('factura'),compact('detFactura'));
+        }
+        
+    }
     public function create(Request $request) 
         {
           
